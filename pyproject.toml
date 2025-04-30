@@ -1,0 +1,12 @@
+[project]
+name = "netkeiba_horseboard_comments"
+version = "0.1.0"
+description = "Collect user comments from netkeiba horseboard"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "mcp[cli]>=1.6.0",
+    "pandas>=2.2.3",
+    "playwright>=1.51.0",
+]
