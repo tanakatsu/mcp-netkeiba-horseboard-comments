@@ -6,9 +6,13 @@ from lib.horse_board_comments import UserComment, HorseBoardComments
 DATA_DIR = "cache"
 
 
-def write_to_text(file_path: Path, user_comments: list[UserComment]) -> None:
+def write_to_text(file_path: Path,
+                  horse_name: str | None,
+                  user_comments: list[UserComment]) -> None:
     file_path.parent.mkdir(parents=True, exist_ok=True)
     with open(file_path, mode='w', newline='') as f:
+        if horse_name:
+            f.write(f"＜{horse_name}＞\n\n")
         if len(user_comments) == 0:
             f.write("まだコメントの投稿がありません。\n")
             return
@@ -20,18 +24,20 @@ def write_to_text(file_path: Path, user_comments: list[UserComment]) -> None:
 def main():
     parser = ArgumentParser(description="Fetch horse board comments.")
     parser.add_argument("horse_id", type=str, help="netkeiba horse ID")
+    parser.add_argument("--horse_name", type=str, help="horse name")
     parser.add_argument("--pages_per_fetch", type=int, default=5,
                         help="Page numbers to fetch once")
     args = parser.parse_args()
 
     horse_id = args.horse_id
+    horse_name = args.horse_name
 
     horse_board = HorseBoardComments(horse_id)
     user_comments = horse_board.fetch_comments()
 
     # ファイルに出力
     output_filename = Path(DATA_DIR) / "horse_board" / f"{horse_id}.txt"
-    write_to_text(output_filename, user_comments)
+    write_to_text(output_filename, horse_name, user_comments)
 
 
 if __name__ == "__main__":

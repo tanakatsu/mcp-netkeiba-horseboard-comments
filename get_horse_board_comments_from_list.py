@@ -7,9 +7,11 @@ from lib.horse_board_comments import UserComment, HorseBoardComments
 DATA_DIR = "cache"
 
 
-def write_to_text(file_path: Path, user_comments: list[UserComment]) -> None:
+def write_to_text(file_path: Path,
+                  horse_name: str, user_comments: list[UserComment]) -> None:
     file_path.parent.mkdir(parents=True, exist_ok=True)
     with open(file_path, mode='w', newline='') as f:
+        f.write(f"＜{horse_name}＞\n\n")
         for user_comment in user_comments:
             f.write(f"{user_comment.time}\n{user_comment.text}\n\n")
 
@@ -50,7 +52,7 @@ def main():
         user_comments = horse_board.fetch_comments()
 
         # ファイルに出力
-        write_to_text(output_filename(horse_id), user_comments)
+        write_to_text(output_filename(horse_id), horse_name, user_comments)
 
 
 if __name__ == "__main__":
