@@ -11,6 +11,10 @@ A Model Context Protocol (MCP) server that provides horse board comments from [n
 ### Get started
 
 1. Install uv
+
+    If you haven't installed uv yet, run this command.
+    Refer to [official guide](https://docs.astral.sh/uv/getting-started/installation/) for more details.
+
     ```
     $ curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
@@ -28,6 +32,8 @@ A Model Context Protocol (MCP) server that provides horse board comments from [n
     $ uv sync
     ```
 1. Install browsers
+
+    If you haven't installed browsers yet, run this command.
     ```
     $ playwright install
     ```
